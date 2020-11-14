@@ -33,6 +33,7 @@ export const getToken = async (): Promise<AxiosResponse<KrogerToken>> => {
     const response = await axios.post(tokenUrl, qs.stringify(body), headers);
     return response.data;
   } catch (error) {
+    // TODO: handle errs
     console.log(error);
   }
 };
