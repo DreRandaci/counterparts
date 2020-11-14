@@ -1,19 +1,17 @@
-const clientId = process.env.CLIENT_ID;
-const clientSecret = process.env.CLIENT_SECRET;
-const scopes = process.env.KROGER_SCOPES;
+// TODO: create module alias for this
 import axios, { AxiosResponse } from 'axios';
 import qs from 'qs';
+import { getKrogerConfig } from '../../../../krogerConfig';
+import { KrogerServiceToken } from '../types/KrogerServiceToken';
 
-interface KrogerToken {
-  expires_in: number;
-  access_token: string;
-  token_type: string;
-}
-
-export const getToken = async (): Promise<AxiosResponse<KrogerToken>> => {
-  const creds = Buffer.from(`${clientId}:${clientSecret}`, `ascii`).toString(
-    'base64',
-  );
+export const getToken = async (): Promise<
+  AxiosResponse<KrogerServiceToken>
+> => {
+  const krogerConfig = getKrogerConfig();
+  const creds = Buffer.from(
+    `${krogerConfig.clientId}:${krogerConfig.clientSecret}`,
+    `ascii`,
+  ).toString('base64');
 
   const headers = {
     headers: {
@@ -24,10 +22,10 @@ export const getToken = async (): Promise<AxiosResponse<KrogerToken>> => {
 
   const body = {
     grant_type: 'client_credentials',
-    scope: scopes,
+    scope: krogerConfig.scopes,
   };
 
-  const tokenUrl = `${process.env.OAUTH2_BASE_URL}/token`;
+  const tokenUrl = `${krogerConfig.oauth2BaseUrl}/token`;
 
   try {
     const response = await axios.post(tokenUrl, qs.stringify(body), headers);
