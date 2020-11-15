@@ -1,0 +1,16 @@
+dist
+build
+.public
+.static
+node_modules
+.tmp
+vendor
+.data.json
+stats.json
+package-lock.json
+deployment_manifest.yml
+docker-compose.yml
+package-lock.json
+tsconfig*.json
+util/nodemon.json
+README.md
