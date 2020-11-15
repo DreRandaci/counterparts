@@ -2,7 +2,7 @@
 import axios, { AxiosResponse } from 'axios';
 import qs from 'qs';
 import { getKrogerConfig } from '../../../../krogerConfig';
-import { KrogerServiceToken } from '../types/KrogerServiceToken';
+import { KrogerServiceToken } from '../types/Kroger';
 
 export const getToken = async (): Promise<
   AxiosResponse<KrogerServiceToken>

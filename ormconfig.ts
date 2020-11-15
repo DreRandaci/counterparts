@@ -14,5 +14,6 @@ export const getOrmConfig = (): MysqlConnectionOptions => {
     logging: true,
     entities: ['src/entities/**/*.ts'],
     migrations: ['src/migrations/**/*.ts'],
+    timezone: 'utc',
   };
 };
